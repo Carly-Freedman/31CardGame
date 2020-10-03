@@ -1,0 +1,47 @@
+________________________________________________________________________
+|$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$|
+|________________________________________________________________________|
+
+\          /      |                            |
+ \        /  __   |  __  __   ___   __       __|__  __
+  \  /\  /  /__\  | |   /  \ | | | /__\        |   /  \
+   \/  \/   \___  | |__ \__/ | | | \___        |   \__/
+     _________________            ________                  _____
+    /	             /|	         /| 	 /|                /    /|
+   /________________/ |         / |_____/ |               /____/ |
+   |==============||  |        /  ///|||  |               |||||  |
+   |=============|||  |       /  /// |||  |               |||||  |
+                 |||  |       | ///  |||  |               |||||  |
+                 |||  |       |///   |||  |               |||||  |
+                 |||  |       ===    |||  |               |||||  |
+       |=========|||  |              |||  |               |||||  |
+       |=========|||  |              |||  |               ||||| /
+                 |||  |           ___|||  |__             |||||/
+                 |||  |          /   ||| /   \            _______
+                 |||  |         /    |||/     \          /=====\ \
+  |==============||| /         ||============||         |=======| |
+  |===============||/          ||============||          \=====/_/
+ _________________________________________________________________________
+|$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ |
+|_________________________________________________________________________|
+Rules:
+*There are 2 modes to choose from
+	-classic (single-player plus automated dealer)
+	-party (two players pls automated dealer)
+*The player(s) begin with $1000.
+*The player(s) and dealer will each receive an initial card. The dealer's will be face down.
+*The player(s) may then place their bet. The minimum bet is $20.00 and the maximum bet is $200.00. The player(s) may not bet more than their current balance. 
+*The game proceeds in rounds.
+*Face cards (Kings, Queens, and Jacks) count as 10 points.
+*Aces count as 1 point or 11 points (player’s choice).
+*Dealer’s Turn: After the two cards are dealt, the dealer goes first. The dealer draws cards until one of the following conditions is met:
+	-The dealer hits 14. In this case, the dealer stands, all his cards are immediately revealed, and the player takes his turn. The player automatically draws until he hits 31 or goes bust. The dealer wins if the player does not hit 31.
+	-The dealer hits 31. In this case, the dealer stands and all his cards are immediately revealed. The dealer wins, without any card drawing from the player. The game round terminates.
+	-The dealer hits 27 or higher but less than 31. In this case, the dealer reveals all but one card to the player and it is the player’s turn.
+	-The dealer hits over 31 (goes bust). In this case, the dealer loses without any card drawing from the player. The game round terminates.
+*Player’s Turn:
+	-The player evaluates the dealer’s open face cards and has the option to “hit” (being dealt an additional card) or “stand” (terminate his turn). The player’s objective is to bring his/her hand as close to 31 points as possible. The player’s turn terminates when the player stands, hits 31, or the player goes “bust” (goes over 31).
+	-If the player hits 14, and the dealer does not have 14 or 31, the player automatically wins the bet and the round terminates.
+	-If the player does not go bust and his hand total is higher than the dealer’s total, he/she wins the bet and the round terminates.
+	-If the dealer and the player have the same hand total, the bet is “pushed” (no win or loss).
+_______________________________________________________________________________________
