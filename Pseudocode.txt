@@ -1,0 +1,185 @@
+
+typedef struct card_s{
+    struct card_s* prev;
+    char suit[9];
+    int value;
+    char face;
+    int direction; // 1 if down, 0 if up
+    struct card_s* next;
+}card;
+
+// definition of card structure
+// I used the one provided in the project rubric but added three members: a char called face, and an int called direction, and a ptr to the previous card.
+// When I pull any face card, I am able to mark it's face in the face member with a letter, and then assign it the appropriate value (like 13-> 10 for Kings). When I want to print a card face down, I flag the direction as 1 until I print it and then change it back to 0.
+//I also made it a doubly linked list for ease of adding and deleting nodes.
+
+
+
+
+typedef struct graphicCard_s{
+    char face[6];
+    char suit[6];
+}graphicCard;
+
+
+// definition of graphic card structure
+// I made this solely for the use of printing graphics in cards. When I print a hand, I assign each card from the linked list to an array of type Graphic card. this allows me to reference just the values I want to print easier as well as allow them to store the characters needed for special characters for the suits of cards.
+
+typedef struct stat_s{
+    int numTotal;
+    int numPWon;
+    int numP14;
+    int numDWon;
+    int numD27;
+}stat;
+
+//definition of stat structure.
+//I use this to keep track of the statistics for the extra credit task. I initially load them as 0's, and increment when necessary. I could have used an array but I found this easier to keep track of what is what.
+
+
+
+
+void MakeDecks(FILE* inp, card** deckHead);
+//This Function reads from the input file and takes one line at a time (or really one int and one char), saves that infor to temporary variables to be stored in the linked lists, and plugs each set into the load deck function.
+
+
+
+
+void LoadDeck(card** head, int tempValue, char tempSuit, char tempFace);
+//this function adds a node(card) to the end of a deck or creates the head. I use it for both the hands and the deck. This also is where I allocate the memory for each of the cards.
+
+
+
+
+void ShuffleDeck(card** head);
+//This function takes the values, faces, and suits, of two random cards from the deck and swaps them. (It does nothing to the address or memory). It does this 10,000 times to insure randomness. this function only runs if a testing deck is not chosen to be uploaded by the user.
+
+
+
+int CountCards(card** hp);
+//this function counts the number of cards within a given deck(or hand).
+
+
+
+void PrintRound(int count);
+//this prints out the round number
+
+
+
+void PrintBalance(double balance);
+//prints the balance of the user
+
+
+
+void PrintDeck(card** hp);
+//takes deck and stores the necessary info of each card in it into an array of type graphic card. the array holds 19 cards as that is the maximum possible cards to have in a hand prior to busting. it then prints the cards using graphics which I made myself (aka thats why I am not crediting an ascii art source)
+
+
+
+void DealCard(card** deckHead, card** handHead);
+// takes first card from deck, places it into the dealer or players hand, and then frees the memory (deletes the card) from the deck.
+
+
+
+
+int HandSum(card** hp);
+// Finds the sum of all the values, aka the number of points achieved, from cards in a hand.
+
+
+
+
+void GetBet(double* bet, double balance);
+// Asks user for bet and insures it is not more than the maximum, less than the minimum, and not more than their current balance.
+
+
+
+void DealerTurn(card** deckHead, card** hp, int* gameStatus);
+// automated dealer takes his turn, drawing cards until he reaches... 14, between 27 and 31, 31, or above 31
+
+
+
+void PlayAutomaticRound(card** deckHead, card** hp, int* gameStatus);
+// used in the case the dealer got to 14. Draws cards for the player until they reach 31 or bust.
+
+
+
+void PlayerTurn(card** deckHead, card** hp, int* gameStatus);
+//player  has option to hit or stand repeatedly until they reach 14, 31, or above 31
+
+
+
+void EvaluateWinner(card** dealerHand, card** playerHand, int* gameStatus);
+//uses game status code explained at the bottom of this document to evaluate the winner of the  game
+
+
+
+double AdjustBalance(int gameStatus, double balance, double bet);
+//adds bet to balance if player won, subtracts bet from balance if player lost
+
+
+void FreeDeck(card** hp);
+//Frees memory for every card in a deck or hand
+
+
+void PrintRules(FILE* rules);
+// prints out opening graphic from text file as well as game rules, most of which I copied from the assignment rubric
+
+
+void AdjustStats(int gameStatus, stat* gameStats);
+//increases number of games as well as number of wins for winner
+
+
+void PrintGameStats(stat gameStats);
+//prints stats graphic from text file and then the statistics gathered from the game thus far
+
+
+void PrintGameOver(FILE* gameOver);
+//prints game over graphic from text file
+
+
+void SinglePlayerGame(card* deckHead, FILE* inp);
+// main function for normal (classic/single-player)
+
+
+void TwoPlayerGame(card* deckHead, FILE* inp);
+//main function for two player game (party mode)
+
+void TwoPlayerAutomaticRound(card** deckHead, card** player1Hand, card** player2Hand, int* gameStatus);
+void TwoPlayersTurns(card** deckHead, card** player1Hand, card** player2Hand, int* gameStatus);
+void EvaluateWinner2Player(card** hand1, card** hand2, int* gameStatus);
+void AdjustBalances2Player(int gameStatus, double* balance1, double* balance2, double* bet1, double* bet2);
+//all 4 of these functions are slightly adjusted from previously defined functions to suit two players.
+
+
+//SINGLE - PLAYER GAME STATUS CODES:
+//      pre-winner being determined:
+//              -2 = dealer got above 27, player stands and results must be compared
+//              2 = dealer hit 14 and player goes into automatic round
+//              0 = dealer got above 27 and player must take turn
+
+
+//      determine winner:
+//              -1 = dealer won
+//              3 = tie... bet pushed
+//              -3 = player won with 14
+//              4 = dealer got up to [27, 31) and then won
+
+//TWO-PLAYER GAME STATUS CODES:
+
+//      pre-winner being determined:
+//              8 = evaluate dealer vs p1
+//              10 = evaluate dealer vs p2
+//              15 = evaluate both players against dealer
+
+
+//      determine winner:
+//              21 ==player two won
+//              7 = player one won
+//              4 = both players lose
+//              9 = bet pushed
+//              6 = both win
+
+
+
+//
+//
